@@ -1,0 +1,74 @@
+\documentclass[11pt]{article}
+\usepackage[ngerman]{babel}
+\usepackage[left=2cm,right=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[]{algorithm2e}
+\newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+	
+	% ========== Edit your name here
+	\title{\textbf{Cryptography Exercise Sheet 2}}
+	\author{Prof. Dr. Thomas Wilke, Dr.-Ing. Kim-Manuel Klein}
+	\maketitle
+	\medskip
+	
+	% ========== Begin answering questions here
+	\begin{enumerate}
+		
+		\item
+		\textbf{Problem:} \textit{A broken one-time pad}
+		
+		Consider a variant of the one time pad with message space $\{0, 1\}^L$ where the key space $\mathcal{K}$ is restricted to all $L$-bit strings with an even number of 1′s. Give an efficient adversary whose semantic security advantage is 1.
+	
+		
+	
+		\item
+        \textbf{Problem:} \textit{Exercising the definition of semantic security}
+        
+        Let $\mathcal{E} = (E,D)$ be a semantically secure cipher defined over $(\mathcal{K}, \mathcal{M}, \mathcal{C})$, where $\mathcal{M} = \mathcal{C} = \{0, 1\}^L$. Which of the following encryption
+        algorithms yields a semantically secure scheme? Either give an attack or provide a security proof
+        via an explicit reduction.  
+        
+         \begin{enumerate}
+        	\item $E_1(k, m) := 0  \parallel E(k, m)$ 
+        	\item $E_2(k, m) := E(k, m) \parallel parity(m)$ 
+        	\item $E_3(k, m) := reverse(E(k, m))$  
+        	\item $E_4(k, m) := E(k, reverse(m))$ 
+        	
+         \end{enumerate}
+		Here, for a bit string s, parity(s) is 1 if the number of 1’s in s is odd, and 0 otherwise; also,
+		reverse(s) is the string obtained by reversing the order of the bits in s, e.g., reverse(1011) = 1101.
+		
+		\item
+		\textbf{Problem:} \textit{Key recovery attacks}
+		
+		Let $\mathcal{E} = (E,D)$ be a cipher defined over  $(\mathcal{K}, \mathcal{M}, \mathcal{C})$. A key recovery
+		attack is modeled by the following game between a challenger and an adversary $\mathcal{A}$: the challenger chooses a random key $k$ in $\mathcal{K}$, a random message $m$ in $\mathcal{M}$, computes $c \xleftarrow{\text{R}} E(k, m)$, and sends $(m, c)$ to $\mathcal{A}$. In response $\mathcal{A}$ outputs a guess $\hat{k}$ in $\mathcal{K}$. We say that $\mathcal{A}$ wins the game if $D(\hat{k}, c) = m$ and define $KRadv[\mathcal{A}, \mathcal{E}]$ to be the probability that $\mathcal{A}$ wins the game. As usual, we say that $\mathcal{E}$ is secure against key recovery attacks if for all efficient adversaries $\mathcal{A}$ the advantage $KRadv[\mathcal{A}, \mathcal{E}]$ is negligible.
+		
+		\begin{enumerate}
+		\item Show that the one-time pad is not secure against key recovery attacks.
+		\item Show that if $\mathcal{E}$ is semantically secure and $e = |\mathcal{K}|/|\mathcal{M}|$ is negligible, then $\mathcal{E}$ is secure against key recovery attacks. In particular, show that for every efficient key-recovery adversary $\mathcal{A}$ there is an efficient semantic security adversary $\mathcal{B}$, where $\mathcal{B}$ is an elementary wrapper around $\mathcal{A}$, such that 
+		\begin{align}
+				KRadv[\mathcal{A}, \mathcal{E}] \leq SSadv[\mathcal{B}, \mathcal{E}] + e 
+		\end{align}
+		\textbf{\textit{Hint}}: Your semantic security adversary $\mathcal{B}$ will output 1 with probability $KRadv[\mathcal{A}, \mathcal{E}]$ in the semantic security Experiment 0 and output 1 with probability at most $e$ in Experiment 1. Deduce from this a lower bound on $SSadv[\mathcal{B}, \mathcal{E}]$ in terms of $e$ and $KRadv[\mathcal{A}, \mathcal{E}]$ from which the result follows.
+		\end{enumerate}
+		\item Deduce from part (b) that if $\mathcal{E}$ is semantically secure and $|\mathcal{M}|$ is super-poly then $|\mathcal{K}|$ cannot	be poly-bounded.
+		
+		\textbf{\textit{Note}}: $|\mathcal{K}|$ can be poly-bounded when $|\mathcal{M}|$ is poly-bounded, as in the one-time pad.
+	\end{enumerate}
+	
+\end{document}
+\grid
+\grid

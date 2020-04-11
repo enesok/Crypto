@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Prof. Dr. Thomas Wilke, Dr.-Ing. Kim-Manuel Klein" />
+  <title>Cryptography Exercise Sheet 2</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title"><strong>Cryptography Exercise Sheet 2</strong></h1>
+<h2 class="author">Prof. Dr. Thomas Wilke, Dr.-Ing. Kim-Manuel Klein</h2>
+</div>
+<ol>
+<li><p><strong>Problem:</strong> <em>A broken one-time pad</em></p>
+<p>Consider a variant of the one time pad with message space <span class="math inline">\(\{0, 1\}^L\)</span> where the key space <span class="math inline">\(\mathcal{K}\)</span> is restricted to all <span class="math inline">\(L\)</span>-bit strings with an even number of 1′s. Give an efficient adversary whose semantic security advantage is 1.</p></li>
+<li><p><strong>Problem:</strong> <em>Exercising the definition of semantic security</em></p>
+<p>Let <span class="math inline">\(\mathcal{E} = (E,D)\)</span> be a semantically secure cipher defined over <span class="math inline">\((\mathcal{K}, \mathcal{M}, \mathcal{C})\)</span>, where <span class="math inline">\(\mathcal{M} = \mathcal{C} = \{0, 1\}^L\)</span>. Which of the following encryption algorithms yields a semantically secure scheme? Either give an attack or provide a security proof via an explicit reduction.</p>
+<ol>
+<li><p><span class="math inline">\(E_1(k, m) := 0  \parallel E(k, m)\)</span></p></li>
+<li><p><span class="math inline">\(E_2(k, m) := E(k, m) \parallel parity(m)\)</span></p></li>
+<li><p><span class="math inline">\(E_3(k, m) := reverse(E(k, m))\)</span></p></li>
+<li><p><span class="math inline">\(E_4(k, m) := E(k, reverse(m))\)</span></p></li>
+</ol>
+<p>Here, for a bit string s, parity(s) is 1 if the number of 1’s in s is odd, and 0 otherwise; also, reverse(s) is the string obtained by reversing the order of the bits in s, e.g., reverse(1011) = 1101.</p></li>
+<li><p><strong>Problem:</strong> <em>Key recovery attacks</em></p>
+<p>Let <span class="math inline">\(\mathcal{E} = (E,D)\)</span> be a cipher defined over <span class="math inline">\((\mathcal{K}, \mathcal{M}, \mathcal{C})\)</span>. A key recovery attack is modeled by the following game between a challenger and an adversary <span class="math inline">\(\mathcal{A}\)</span>: the challenger chooses a random key <span class="math inline">\(k\)</span> in <span class="math inline">\(\mathcal{K}\)</span>, a random message <span class="math inline">\(m\)</span> in <span class="math inline">\(\mathcal{M}\)</span>, computes <span class="math inline">\(c \xleftarrow{\text{R}} E(k, m)\)</span>, and sends <span class="math inline">\((m, c)\)</span> to <span class="math inline">\(\mathcal{A}\)</span>. In response <span class="math inline">\(\mathcal{A}\)</span> outputs a guess <span class="math inline">\(\hat{k}\)</span> in <span class="math inline">\(\mathcal{K}\)</span>. We say that <span class="math inline">\(\mathcal{A}\)</span> wins the game if <span class="math inline">\(D(\hat{k}, c) = m\)</span> and define <span class="math inline">\(KRadv[\mathcal{A}, \mathcal{E}]\)</span> to be the probability that <span class="math inline">\(\mathcal{A}\)</span> wins the game. As usual, we say that <span class="math inline">\(\mathcal{E}\)</span> is secure against key recovery attacks if for all efficient adversaries <span class="math inline">\(\mathcal{A}\)</span> the advantage <span class="math inline">\(KRadv[\mathcal{A}, \mathcal{E}]\)</span> is negligible.</p>
+<ol>
+<li><p>Show that the one-time pad is not secure against key recovery attacks.</p></li>
+<li><p>Show that if <span class="math inline">\(\mathcal{E}\)</span> is semantically secure and <span class="math inline">\(e = |\mathcal{K}|/|\mathcal{M}|\)</span> is negligible, then <span class="math inline">\(\mathcal{E}\)</span> is secure against key recovery attacks. In particular, show that for every efficient key-recovery adversary <span class="math inline">\(\mathcal{A}\)</span> there is an efficient semantic security adversary <span class="math inline">\(\mathcal{B}\)</span>, where <span class="math inline">\(\mathcal{B}\)</span> is an elementary wrapper around <span class="math inline">\(\mathcal{A}\)</span>, such that <span class="math display">\[\begin{aligned}
+                KRadv[\mathcal{A}, \mathcal{E}] \leq SSadv[\mathcal{B}, \mathcal{E}] + e 
+        \end{aligned}\]</span> <strong><em>Hint</em></strong>: Your semantic security adversary <span class="math inline">\(\mathcal{B}\)</span> will output 1 with probability <span class="math inline">\(KRadv[\mathcal{A}, \mathcal{E}]\)</span> in the semantic security Experiment 0 and output 1 with probability at most <span class="math inline">\(e\)</span> in Experiment 1. Deduce from this a lower bound on <span class="math inline">\(SSadv[\mathcal{B}, \mathcal{E}]\)</span> in terms of <span class="math inline">\(e\)</span> and <span class="math inline">\(KRadv[\mathcal{A}, \mathcal{E}]\)</span> from which the result follows.</p></li>
+<li><p>Deduce from part (b) that if <span class="math inline">\(\mathcal{E}\)</span> is semantically secure and <span class="math inline">\(|\mathcal{M}|\)</span> is super-poly then <span class="math inline">\(|\mathcal{K}|\)</span> cannot be poly-bounded.</p>
+<p><strong><em>Note</em></strong>: <span class="math inline">\(|\mathcal{K}|\)</span> can be poly-bounded when <span class="math inline">\(|\mathcal{M}|\)</span> is poly-bounded, as in the one-time pad.</p></li>
+</ol></li>
+</body>
+</html>
