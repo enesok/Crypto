@@ -1,0 +1,158 @@
+%\documentclass{article}
+\documentclass[USenglish,a4paper,12pt]{scrartcl}
+
+\usepackage[left=2cm,right=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[]{algorithm2e}
+
+\usepackage{enumerate}
+\usepackage{dsfont}
+\usepackage{enumitem}
+\usepackage{amsthm}
+\usepackage{graphics}
+\usepackage{pdfpages}
+\usepackage{hyperref}
+
+
+%\usepackage{ntheorem}
+%\usepackage{lipsum}
+\theoremstyle{break}
+\newtheoremstyle{break}% name
+  {}%         Space above, empty = `usual value'
+  {}%         Space below
+  {\normalfont}% Body font
+  {}%         Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}% Thm head font
+  {.}%        Punctuation after thm head
+  {\newline}% Space after thm head: \newline = linebreak
+  {}%         Thm head spec
+
+\theoremstyle{break}
+\newtheorem{exerc}{Exercise}
+
+\newcommand{\KK}{\mathcal{K}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\CC}{\mathcal{C}}
+%\newcommand{\Pr}{\text{Pr}}
+
+
+\usepackage{environ}
+\NewEnviron{killcontents}{}
+\let\proof\killcontents
+\let\endproof\endkillcontents
+
+\author{Kim Klein}
+\date{April 2019}
+
+\begin{document}
+
+\section*{Problem 3}
+    Consider the following SPN:
+\begin{itemize}
+\item the subblock length is $n=4$,
+\item a plaintext consists of $m=8$ subblocks,
+\item the key length is $s=32$,
+\item the number of rounds is $r=3$,
+\item the $S$-Box is defined as follows: \\
+
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+$0000$ & $0001$ & $0010$ & $0011$ & $0100$ & $0101$ & $0110$ & $0111$ & $1000$ & $1001$ & $1010$ & $1011$ & $1100$ & $1101$ & $1110$ & $1111$ \\
+\hline
+$1111$ & $0100$ & $1101$ & $0110$ & $0000$ & $1100$ & $1011$ & $1110$ & $0111$ & $0010$ & $1010$ & $0101$ & $1001$ & $0011$ & $1000$ & $0001$ \\
+\hline
+\end{tabular}
+}
+\item the permutation is defined as follows: \\
+
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+$0$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ & $12$ & $13$ & $14$ & $15$ &$16$ & $17$ & $18$ & $19$ & $20$ & $21$ & $22$ & $23$ & $24$ & $25$ & $26$ & $27$ & $28$ & $29$ & $30$ & $31$ \\
+\hline
+$7$ & $4$ & $3$ & $2$ & $1$ & $11$ & $14$ & $0$ & $13$ & $12$ & $15$ & $5$ & $9$ & $8$ & $6$ & $10$ &$23$ & $19$ & $31$ & $17$ & $26$ & $30$ & $22$ & $16$ & $29$ & $25$ & $20$ & $28$ & $27$ & $24$ & $21$ & $18$ \\
+\hline
+\end{tabular}
+}
+\item the round key is $K(k,i)=k$, for $i\le3$.
+\end{itemize}
+
+\noindent The approximation chart for the S-Box is given as follows: 
+
+%\resizebox{\columnwidth}{!}{
+%\begin{tabular}{c|cccccccccccccccc}
+%$x \backslash S(x)$ & $0000$ & $0001$ & $0010$ & $0011$ & $0100$ & $0101$ & $0110$ & $0111$ & $1000$ & $1001$ & $1010$ & $1011$ & $1100$ & $1101$ & $1110$ & $1111$ \\
+%\hline
+%$0000$ & - & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ \\
+%$0001$ & $0$ & $-\frac{1}{8}$ & $0$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{8}$ & $0$ & $-\frac{1}{4}$ & $\frac{1}{8}$ & $0$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $0$ & $\frac{1}{8}$ & $0$ \\
+%$0010$ & $0$ & $0$ & $0$ & $\frac{1}{4}$ & $0$ & $0$ & $0$ & $-\frac{1}{4}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $\frac{1}{8}$ \\
+%$0011$ & $0$ & $-\frac{1}{8}$ & $0$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $0$ & $\frac{3}{8}$ & $0$ & $\frac{1}{8}$ & $0$ & $\frac{1}{8}$ & $0$ & $0$ & $\frac{1}{8}$ & $0$ & $\frac{1}{8}$ \\
+%$0100$ & $0$ & $0$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $-\frac{1}{4}$ & $\frac{1}{4}$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $0$ & $0$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $0$ & $0$ \\
+%$0101$ & $0$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $0$ & $-\frac{1}{8}$ & $0$ & $0$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $-\frac{1}{4}$ & $0$ & $\frac{1}{8}$ & $\frac{1}{4}$ & $-\frac{1}{8}$ & $\frac{1}{8}$ & $0$ \\
+%$0110$ & $0$ & $0$ & $-\frac{1}{8}$ & $\frac{1}{8}$ & $0$ & $0$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $0$ & $0$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $0$ & $0$ & $-\frac{1}{8}$ & $-\frac{3}{8}$ \\
+%$0111$ & $0$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $\frac{1}{4}$ & $-\frac{1}{8}$ & $0$ & $0$ & $\frac{1}{8}$ & $0$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $-\frac{1}{4}$ & $-\frac{1}{8}$ & $0$ & $0$ & $\frac{1}{8}$ \\
+%$1000$ & $0$ & $\frac{1}{8}$ & $0$ & $\frac{1}{8}$ & $-\frac{1}{4}$ & $-\frac{1}{8}$ & $0$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{8}$ & $0$ & $\frac{1}{8}$ & $0$ & $\frac{1}{8}$ & $0$ \\
+%$1001$ & $0$ & $-\frac{1}{4}$ & $0$ & $0$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $\frac{1}{4}$ & $0$ & $0$ & $0$ \\
+%$1010$ & $0$ & $\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{8}$ & $0$ & $\frac{1}{8}$ & $0$ & $-\frac{1}{8}$ & $0$ & $-\frac{1}{8}$ & $\frac{1}{4}$ & $-\frac{1}{8}$ & $0$ & $-\frac{1}{8}$ & $0$ & $\frac{1}{8}$ \\
+%$1011$ & $0$ & $\frac{1}{4}$ & $-\frac{1}{4}$ & $0$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $0$ & $0$ & $0$ & $0$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $\frac{1}{8}$ \\
+%$1100$ & $0$ & $-\frac{1}{8}$ & $\frac{1}{8}$ & $0$ & $0$ & $-\frac{1}{8}$ & $\frac{1}{8}$ & $0$ & $0$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $0$ & $0$ & $-\frac{3}{8}$ & $-\frac{1}{8}$ & $0$ \\
+%$1101$ & $0$ & $0$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $\frac{1}{8}$ & $0$ & $0$ & ? & $0$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $-\frac{1}{4}$ & $0$ \\
+%$1110$ & $0$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $0$ & $0$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $0$ & $-\frac{1}{8}$ & $0$ & $\frac{1}{4}$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $0$ & $-\frac{1}{4}$ & $\frac{1}{8}$ \\
+%$1111$ & $0$ & $0$ & $-\frac{1}{8}$ & $-\frac{1}{8}$ & $\frac{1}{8}$ & $-\frac{1}{8}$ & $0$ & $-\frac{1}{4}$ & $-\frac{1}{8}$ & $\frac{1}{8}$ & $0$ & $-\frac{1}{4}$ & $0$ & $0$ & $\frac{1}{8}$ & $\frac{1}{8}$ 
+%\end{tabular}
+
+\scalebox{0.75}{
+     \begin{minipage}{10cm}
+     $$\begin{array}{c|cccccccccccccccc}
+          & 0000 & 0001 & 0010 & 0011 & 0100 & 0101 & 0110 & 0111 & 1000 & 1001 & 1010 & 1011 & 1100 & 1101 & 1110 & 1111\\ \hline
+     0000 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+     0001 & 0 & -\frac18 & 0 & \frac18 & \frac18 & \frac14 & \frac18 & 0 & -\frac14 & \frac18 & 0 & \frac18 & -\frac18 & 0 & \frac18 & 0 \\
+     0010 & 0 & 0 & 0 & \frac14 & 0 & 0 & 0 & -\frac14 & \frac18 & \frac18 & -\frac18 & \frac18 & \frac18 & \frac18 & -\frac18 & \frac18 \\
+     0011 & 0 & -\frac18 & 0 & -\frac18 & -\frac18 & 0 & \frac38 & 0 & \frac18 & 0 & \frac18 & 0 & 0 & \frac18 & 0 & \frac18 \\
+     0100 & 0 & 0 & -\frac18 & -\frac18 & -\frac14 & \frac14 & -\frac18 & -\frac18 & \frac18 & \frac18 & 0 & 0 & -\frac18 & -\frac18 & 0 & 0 \\
+     0101 & 0 & -\frac18 & -\frac18 & 0 & -\frac18 & 0 & 0 & -\frac18 & -\frac18 & -\frac14 & 0 & \frac18 & \frac14 & -\frac18 & \frac18 & 0 \\
+     0110 & 0 & 0 & -\frac18 & \frac18 & 0 & 0 & \frac18 & -\frac18 & 0 & 0 & \frac18 & -\frac18 & 0 & 0 & -\frac18 & -\frac38 \\
+     0111 & 0 & -\frac18 & -\frac18 & \frac14 & -\frac18 & 0 & 0 & \frac18 & 0 & -\frac18 & -\frac18 & -\frac14 & -\frac18 & 0 & 0 & \frac18 \\
+     1000 & 0 & \frac18 & 0 & \frac18 & -\frac14 & -\frac18 & 0 & \frac18 & -\frac18 & \frac14 & \frac18 & 0 & \frac18 & 0 & \frac18 & 0 \\
+     1001 & 0 & -\frac14 & 0 & 0 & \frac18 & \frac18 & -\frac18 & \frac18 & \frac18 & \frac18 & \frac18 & -\frac18 & \frac14 & 0 & 0 & 0 \\
+     1010 & 0 & \frac18 & \frac14 & \frac18 & 0 & \frac18 & 0 & -\frac18 & 0 & -\frac18 & \frac14 & -\frac18 & 0 & -\frac18 & 0 & \frac18 \\
+     1011 & 0 & \frac14 & -\frac14 & 0 & \frac18 & \frac18 & \frac18 & \frac18 & 0 & 0 & 0 & 0 & \frac18 & -\frac18 & -\frac18 & \frac18 \\
+     1100 & 0 & -\frac18 & \frac18 & 0 & 0 & -\frac18 & \frac18 & 0 & 0 & \frac18 & -\frac18 & 0 & 0 & -\frac38 & -\frac18 & 0 \\
+     1101 & 0 & 0 & \frac18 & -\frac18 & -\frac18 & \frac18 & 0 & 0 & \text{?} & 0 & -\frac18 & -\frac18 & \frac18 & \frac18 & -\frac14 & 0 \\
+     1110 & 0 & -\frac18 & -\frac18 & 0 & 0 & -\frac18 & -\frac18 & 0 & -\frac18 & 0 & \frac14 & \frac18 & -\frac18 & 0 & -\frac14 & \frac18 \\
+     1111 & 0 & 0 & -\frac18 & -\frac18 & \frac18 & -\frac18 & 0 & -\frac14 & -\frac18 & \frac18 & 0 & -\frac14 & 0 & 0 & \frac18 & \frac18 \\
+     \end{array}$$
+     \end{minipage}}
+     
+\vspace{0.5cm}
+\emph{In this table, the numbers reflect the biases as follows: For instance the entry in row $0101$ and column $1011$ is $2 (\Pr [x[1,3] \oplus S(x)[0,2,3] = 0]-\frac12) = 2 \epsilon$.}
+
+\begin{enumerate}[label=\alph*)]
+\item Compute the missing value in the so called approximation chart that states the biases in the S-Box for all subsets $S_0$ and $S_1$.
+
+\item Determine the linear relation between the plaintext bits, key bits and $S(x)[2]$. Hint: Start with $x[2] \oplus S(x)[2,3] =0$ for the S-Box.
+
+\item Given are a plaintext-cyphertext pair and a potential key: \\
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $0111$ & $0110$ & $0101$ & $0100$ & $0000$ & $1001$ & $1011$ & $1100$ \\ \hline
+$y$ & $1010$ & $1010$ & $0001$ & $0100$ & $0100$ & $1111$ & $1011$ & $1000$\\
+\hline
+k & $0100$ & $1001$ & $0100$ & $1010$ & $0101$ & $0011$ & $0101$ & $1001$ \\
+\hline
+\end{tabular}
+
+Check whether your equation from b) holds for those values.
+
+%Compute $z'_2$ (which is equal to the block before the last key addition $y \oplus k$) for the given values. 
+
+\end{enumerate}
+
+\end{document}
+ 
