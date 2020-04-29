@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Prof. Dr. Thomas Wilke, Dr.-Ing. Kim-Manuel Klein" />
+  <title>Cryptography Exercise Sheet 5</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title"><strong>Cryptography Exercise Sheet 5</strong></h1>
+<h2 class="author">Prof. Dr. Thomas Wilke, Dr.-Ing. Kim-Manuel Klein</h2>
+</div>
+<ol>
+<li><p><strong>Problem:</strong> <em>Double encryption (Exercise 5.1 in BS)</em></p>
+<p>Let <span class="math inline">\(\mathcal{E} = (E,D)\)</span> be a cipher. Consider the cipher <span class="math inline">\(\mathcal{E}_2=(E_2, D_2)\)</span>, where <span class="math inline">\(E_2(k,m) = E(k, E(k,m))\)</span>. One would expect that if encrypting a message once with <span class="math inline">\(E\)</span> is secure then encrypting it twice as in <span class="math inline">\(E_2\)</span> should be no less secure. However, that is not always true.</p>
+<ol type="a">
+<li><p>Show that there is a semantically secure cipher <span class="math inline">\( \mathcal{E}\)</span> such that <span class="math inline">\(\mathcal{E}_2\)</span> is not semantically secure.</p></li>
+<li><p>Prove that for every CPA secure ciphers <span class="math inline">\(\mathcal{E}\)</span>, the cipher <span class="math inline">\(\mathcal{E}_2\)</span> is also CPA secure. That is, show that for every CPA adversary <span class="math inline">\( \mathcal{A}\)</span> attacking <span class="math inline">\(\mathcal{E}_2\)</span> there is a CPA adversary <span class="math inline">\( \mathcal{B}\)</span> attacking <span class="math inline">\( \mathcal{E}\)</span> with about the same advantage and running time.</p></li>
+</ol></li>
+<li><p><strong>Problem:</strong> <em>An alternate definition of CPA security (Exercise 5.3 in BS)</em></p>
+<p>This exercise develops an alternative characterization of CPA security for a cipher <span class="math inline">\(\mathcal{E} = (E,D)\)</span>, defined over <span class="math inline">\((\mathcal{K}, \mathcal{M}, \mathcal{C})\)</span>. As usual, we need to define an attack game between an adversary <span class="math inline">\(\mathcal{A}\)</span> and a challenger. Initially, the challenger generates <span class="math display">\[\begin{aligned}
+        b \xleftarrow{\text{R}} \{0,1\}, k \xleftarrow{\text{R}} \mathcal{K}. 
+        \end{aligned}\]</span></p>
+<p>Then <span class="math inline">\(\mathcal{A}\)</span> makes a series of queries to the challenger. There are two types of queries:</p>
+<dl>
+<dt><strong>Encryption:</strong> In an <em>encryption query</em>, <span class="math inline">\(\mathcal{A}\)</span> submits a message <span class="math inline">\(m  \in \mathcal{M}\)</span> to the challenger, who responds with a ciphertext <span class="math inline">\(c \xleftarrow{\text{R}} E(k, m)\)</span>. The adversary may make any (poly-bounded) number of encryption queries.</dt>
+
+<dt><strong>Test:</strong> In a <em>test query</em>, <span class="math inline">\(\mathcal{A}\)</span> submits a pair of messages <span class="math inline">\(m_0, m_1 \in \mathcal{M}\)</span> to the challenger, who responds with a ciphertext <span class="math inline">\(c \xleftarrow{\text{R}} E(k, m_b)\)</span>. The adversary is allowed to make only a <em>single</em> test query (with any number of encryption queries before and after the test query).</dt>
+</dl>
+<p>At the end of the game, <span class="math inline">\(\mathcal{A}\)</span> outputs a bit <span class="math inline">\(\hat{b} \in \{0,1\}\)</span>.</p>
+<p>As usual, we define <span class="math inline">\(\mathcal{A}\)</span>’s advantage in the above attack game to be <span class="math inline">\(|Pr[\hat{b}= b]-1/2|\)</span>. We say that <span class="math inline">\(\mathcal{E}\)</span> is Alt-CPA secure if this advantage is negligible for all efficient adversaries.</p>
+<p>Show that <span class="math inline">\(\mathcal{E}\)</span> is CPA secure if and only if <span class="math inline">\(\mathcal{E}\)</span> is Alt-CPA secure.</p></li>
+<li><p><strong>Problem:</strong> <em>Ciphertext expansion vs. security (Exercise 5.10 in BS)</em></p>
+<p>Let <span class="math inline">\(\mathcal{E} = (E,D)\)</span> be an encryption scheme where messages and ciphertexts are bit strings.</p>
+<ol type="a">
+<li><p>Suppose that for all keys and all messages <span class="math inline">\(m\)</span>, the encryption of <span class="math inline">\(m\)</span> is the exact same length as <span class="math inline">\(m\)</span>. Show that <span class="math inline">\((E, D)\)</span> cannot be semantically secure under a chosen plaintext attack.</p></li>
+<li><p>Suppose that for all keys and all messages <span class="math inline">\(m\)</span>, the encryption of m is exactly <span class="math inline">\(\ell\)</span> bits longer than the length of <span class="math inline">\(m\)</span>. Show an attacker that can win the CPA security game using <span class="math inline">\(\approx 2^{\ell/2}\)</span> queries and advantage <span class="math inline">\(\approx\)</span> 1/2. You may assume the message space contains many more than <span class="math inline">\(2^{\ell/2}\)</span> messages.</p></li>
+</ol></li>
+</ol>
+</body>
+</html>
