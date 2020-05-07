@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Prof. Dr. Thomas Wilke, Dr.-Ing. Kim-Manuel Klein" />
+  <title>Cryptography Exercise Sheet 6</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title"><strong>Cryptography Exercise Sheet 6</strong></h1>
+<h2 class="author">Prof. Dr. Thomas Wilke, Dr.-Ing. Kim-Manuel Klein</h2>
+</div>
+<ol>
+<li><p><strong>Problem:</strong> <em>The 802.11b insecure Mac (Exercise 6.1 in BS)</em></p>
+<p>Consider the following MAC (a variant of this was used for WiFi encryption in 802.11b WEP). Let <em>F</em> be a PRF defined over <span class="math inline">\((\mathcal{K}, \mathcal{R}, \mathcal{X})\)</span> where <span class="math inline">\(\mathcal{X}\)</span> := <span class="math inline">\(\{0, 1\}^{32}\)</span>. Let CRC32 be a simple and popular error-detecting code meant to detect random errors; CRC32 is a function that takes as input <span class="math inline">\(m \in \{0,1\}^{\leq\ell} \)</span> and outputs a 32-bit string. Define the following MAC system <em>(S, V)</em>:</p>
+<p><span class="math inline">\(S(k,m):=\big\{\)</span> <span class="math inline">\(r \xleftarrow{\text{R}} \mathcal{R}\)</span>, <span class="math inline">\( t \xleftarrow{} F(k,r)\)</span> <span class="math inline">\(\oplus\)</span> CRC32(<span class="math inline">\(m\)</span>), output(r,t) <span class="math inline">\(\big\}\)</span></p></li> <span class="math inline">\(V(k,m, (r,t)):=\big\{\)</span> <span><strong>accept</strong></span> if <span class="math inline">\(t = F(k,r)\)</span> <span class="math inline">\(\oplus\)</span> CRC32(<span class="math inline">\(m\)</span>) and <span><strong>reject</strong></span> otherwise <span class="math inline">\(\big\}\)</span></p>
+<p>Show that this MAC system is insecure.</p></li>
+<li><p><strong>Problem:</strong> <em>MAC combiners (Exercise 6.5 in BS)</em></p>
+<p>We want to build a MAC system <span class="math inline">\(\mathcal{I}\)</span> using two MAC systems <span class="math inline">\(\mathcal{I}_1 = (S_1 , V_1 )\)</span> and <span class="math inline">\(\mathcal{I}_2 = (S_2 , V_2 )\)</span>, so that if at some time one of <span class="math inline">\(\mathcal{I}_1\)</span> or <span class="math inline">\(\mathcal{I}_2\)</span> is broken (but not both) then <span class="math inline">\(\mathcal{I}\)</span> is still secure. Put another way, we want to construct <span class="math inline">\(\mathcal{I}\)</span> from <span class="math inline">\(\mathcal{I}_1\)</span> and <span class="math inline">\(\mathcal{I}_2\)</span> such that <span class="math inline">\(\mathcal{I}\)</span> is secure if either <span class="math inline">\(\mathcal{I}_2\)</span> or <span class="math inline">\(\mathcal{I}_2\)</span> is secure.</p>
+<ol type="a" >
+<li><p>Define <span class="math inline">\(\mathcal{I} = (S,V)\)</span>, where</p>
+<p><span class="math inline">\(S((k_1, k_2), m):= ((S_1(k_1,m), S_2(k_2,m))\)</span>,</p>
+<p>and <span class="math inline">\(V\)</span> is defined in the obvious way: on input <span class="math inline">\((k, m, (t_1 , t_2 ))\)</span>, <span class="math inline">\(V\)</span> accepts iff both <span class="math inline">\(V_1 (k_1 , m, t_1 )\)</span> and <span class="math inline">\(V_2 (k_2 , m, t_2 )\)</span> accept. Show that <span class="math inline">\(\mathcal{I}\)</span> is secure if either <span class="math inline">\(\mathcal{I}_1\)</span> or <span class="math inline">\(\mathcal{I}_2\)</span> is secure.</p></li>
+<li><p>Suppose that <span class="math inline">\(\mathcal{I}_1\)</span> and <span class="math inline">\(\mathcal{I}_2\)</span> are deterministic MAC systems (see the definition on page 214), and that both have tag space <span class="math inline">\(\{0, 1\}^n\)</span> . Define the deterministic MAC system <span class="math inline">\(\mathcal{I} = (S, V )\)</span>, where</p>
+<p><span class="math inline">\(S( (k_1 , k_2 ), m) := S 1 (k_1 , m) \)</span> <span class="math inline">\(\oplus\)</span> <span class="math inline">\( S_2 (k_2 , m)\)</span>.</p>
+<p>Show that <span class="math inline">\(\mathcal{I}\)</span> is secure if either <span class="math inline">\(\mathcal{I}_1\)</span> or <span class="math inline">\(\mathcal{I}_2\)</span> is secure.</p></li>
+</ol></li>
+</ol>
+</body>
+</html>
