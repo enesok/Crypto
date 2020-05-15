@@ -1,0 +1,45 @@
+\documentclass[11pt]{article}
+\usepackage[ngerman]{babel}
+\usepackage[left=2cm,right=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[]{algorithm2e}
+\newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+	
+	% ========== Edit your name here
+	\title{\textbf{Cryptography Exercise Sheet 9}}
+	\author{Prof. Dr. Thomas Wilke, Dr.-Ing. Kim-Manuel Klein}
+	\maketitle
+	\medskip
+	
+	% ========== Begin answering questions here
+	\begin{enumerate}
+		
+		\item
+		\textbf{Problem:} \textit{AE-security: simple examples (Exercise 9.1 in BS)}
+		
+		Let $(E, D)$ be an AE-secure cipher. Consider the following derived ciphers:
+		
+		\begin{enumerate}
+			\item $E_1(k,m) := (E(k,m), E(k,m))$;                                  $D_1(k, (c_1, c_2)) := \begin{cases} D(k,c_1) & \text{if $D(k,c_1) = D(k,c_2)$ }\\ {\bf reject}& \text{otherwise}\end{cases}$
+			
+			\item $E_2(k,m) := \{c \xleftarrow{}E(k,m),  output(c,c) \}$; $D_2(k, (c_1, c_2)) := \begin{cases} D(k,c_1) & \text{if $c_1 = c_2$ }\\ {\bf reject}& \text{otherwise}\end{cases}$
+		\end{enumerate}
+	
+	Show that part (b) is AE-secure, but part (a) is not.
+	\end{enumerate}
+	
+\end{document}
+\grid
+\grid

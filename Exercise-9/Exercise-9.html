@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Prof. Dr. Thomas Wilke, Dr.-Ing. Kim-Manuel Klein" />
+  <title>Cryptography Exercise Sheet 9</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title"><strong>Cryptography Exercise Sheet 9</strong></h1>
+<h2 class="author">Prof. Dr. Thomas Wilke, Dr.-Ing. Kim-Manuel Klein</h2>
+</div>
+<ol>
+<li><p><strong>Problem:</strong> <em>AE-security: simple examples (Exercise 9.1 in BS)</em></p>
+<p>Let <span class="math inline">\((E, D)\)</span> be an AE-secure cipher. Consider the following derived ciphers:</p>
+<ol type = "a">
+<li><p><span class="math inline">\(E_1(k,m) := (E(k,m), E(k,m))\)</span>; <span class="math inline">\(D_1(k, (c_1, c_2)) := \begin{cases} D(k,c_1) &amp; \text{if $D(k,c_1) = D(k,c_2)$ }\\ {\bf reject}&amp; \text{otherwise}\end{cases}\)</span></p></li>
+<li><p><span class="math inline">\(E_2(k,m) := \{c \xleftarrow{}E(k,m),  output(c,c) \}\)</span>; <span class="math inline">\(D_2(k, (c_1, c_2)) := \begin{cases} D(k,c_1) &amp; \text{if $c_1 = c_2$ }\\ {\bf reject}&amp; \text{otherwise}\end{cases}\)</span></p></li>
+</ol>
+<p>Show that part (b) is AE-secure, but part (a) is not.</p></li>
+</ol>
+</body>
+</html>
